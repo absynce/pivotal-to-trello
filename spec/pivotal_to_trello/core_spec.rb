@@ -18,6 +18,7 @@ describe 'Core' do
     allow(core).to receive(:prompt_selection).with("Which Trello list would you like to put 'current' stories into?", trello.list_choices).and_return('current_list_id')
     allow(core).to receive(:prompt_selection).with("Which Trello list would you like to put 'finished' stories into?", trello.list_choices).and_return('finished_list_id')
     allow(core).to receive(:prompt_selection).with("Which Trello list would you like to put 'delivered' stories into?", trello.list_choices).and_return('delivered_list_id')
+    allow(core).to receive(:prompt_selection).with("Which Trello list would you like to put 'planned' stories into?", trello.list_choices).and_return('planned_list_id')
     allow(core).to receive(:prompt_selection).with("Which Trello list would you like to put 'accepted' stories into?", trello.list_choices).and_return('accepted_list_id')
     allow(core).to receive(:prompt_selection).with("Which Trello list would you like to put 'rejected' stories into?", trello.list_choices).and_return('rejected_list_id')
     allow(core).to receive(:prompt_selection).with("Which Trello list would you like to put 'backlog' bugs into?", trello.list_choices).and_return('bug_list_id')
@@ -48,6 +49,12 @@ describe 'Core' do
       it 'handles accepted stories' do
         allow(story).to receive_messages(current_state: 'accepted')
         expect(trello).to receive(:create_card).with(core.options.accepted_list_id, story).and_return(card)
+        core.import!
+      end
+
+      it 'handles planned stories' do
+        allow(story).to receive_messages(current_state: 'planned')
+        expect(trello).to receive(:create_card).with(core.options.planned_list_id, story).and_return(card)
         core.import!
       end
 

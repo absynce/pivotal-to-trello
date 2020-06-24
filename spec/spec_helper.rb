@@ -62,6 +62,7 @@ def mock_options
                  finished_list_id:   'finished_list_id',
                  delivered_list_id:  'delivered_list_id',
                  accepted_list_id:   'accepted_list_id',
+                 planned_list_id:    'planned_list_id',
                  rejected_list_id:   'rejected_list_id',
                  bug_list_id:        'bug_list_id',
                  chore_list_id:      'chore_list_id',

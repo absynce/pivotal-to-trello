@@ -37,6 +37,8 @@ module PivotalToTrello
 
       if story.current_state == 'accepted'
         list_id = options.accepted_list_id
+      elsif story.current_state == 'planned'
+        list_id = options.planned_list_id
       elsif story.current_state == 'rejected'
         list_id = options.rejected_list_id
       elsif story.current_state == 'finished'
@@ -84,6 +86,7 @@ module PivotalToTrello
       options.pivotal_project_id = prompt_selection('Which Pivotal project would you like to export?', pivotal.project_choices)
       options.trello_board_id    = prompt_selection('Which Trello board would you like to import into?', trello.board_choices)
       options.icebox_list_id     = prompt_selection("Which Trello list would you like to put 'icebox' stories into?", trello.list_choices(options.trello_board_id))
+      options.planned_list_id    = prompt_selection("Which Trello list would you like to put 'planned' stories into?", trello.list_choices(options.trello_board_id))
       options.current_list_id    = prompt_selection("Which Trello list would you like to put 'current' stories into?", trello.list_choices(options.trello_board_id))
       options.finished_list_id   = prompt_selection("Which Trello list would you like to put 'finished' stories into?", trello.list_choices(options.trello_board_id))
       options.delivered_list_id  = prompt_selection("Which Trello list would you like to put 'delivered' stories into?", trello.list_choices(options.trello_board_id))
